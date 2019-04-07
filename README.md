@@ -1,4 +1,4 @@
-[![Build Status](https://alefranz.visualstudio.com/HeaderPropagation/_apis/build/status/alefranz.HeaderPropagation?branchName=master)](https://alefranz.visualstudio.com/HeaderPropagation/_build/latest?definitionId=1?branchName=master) [![](https://img.shields.io/nuget/v/HeaderPropagation.svg)](https://www.nuget.org/packages/HeaderPropagation/)
+[![Build Status](https://alefranz.visualstudio.com/HeaderPropagation/_apis/build/status/Build?branchName=master)](https://alefranz.visualstudio.com/HeaderPropagation/_build/latest?definitionId=3&branchName=master) [![](https://img.shields.io/nuget/v/HeaderPropagation.svg)](https://www.nuget.org/packages/HeaderPropagation/)
 
 ## About HeaderPropagation
 
@@ -37,9 +37,7 @@ services.AddHttpClient<GitHubClient>(c =>
 }).AddHeaderPropagation();
 ```
 
-See [Samples/WebApplication](Samples/WebApplication).
-
-## Configuration
+See [samples/WebApplication](samples/WebApplication).
 
 ## Behaviour
 
