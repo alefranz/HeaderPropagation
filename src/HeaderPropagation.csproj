@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>
+      ASP.NET Core middleware to propagate HTTP headers from the incoming request to the outgoing HTTP Client requests.
+      This is a backport to ASP.NET Core 2.1 (and 2.2) of the ASP.NET Core HeaderPropagation middleware I had recently contributed to the ASP.NET Core project.
+      All code is licensed under the Apache License, Version 2.0 and copyrighted by the .NET Foundation.
+    </Description>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <Authors>Alessio Franceschelli</Authors>
+    <PackageTags>HttpClient;HttpClientFactory;AspNetCore</PackageTags>
+    <PackageLicenseUrl>https://github.com/alefranz/HeaderPropagation/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/alefranz/HeaderPropagation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alefranz/HeaderPropagation.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>https://github.com/alefranz/HeaderPropagation/releases</PackageReleaseNotes>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
+  </ItemGroup>
+
+</Project>
