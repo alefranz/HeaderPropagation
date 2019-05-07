@@ -22,10 +22,14 @@ namespace WebApplication
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddHeaderPropagation(o => o.Headers.Add("User-Agent", new HeaderPropagationEntry
+            services.AddHeaderPropagation(o =>
             {
-                DefaultValue = "Mozilla/5.0 (trust me, I'm really Mozilla!)",
-            }));
+                // propagate the header
+                o.Headers.Add("User-Agent");
+
+                // set it with a value factory if missing
+                o.Headers.Add("User-Agent", context => "Mozilla/5.0 (trust me, I'm really Mozilla!)");
+            });
 
             services.AddHttpClient<GitHubClient>(c =>
             {

@@ -1,7 +1,6 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using Microsoft.Extensions.Primitives;
@@ -9,20 +8,28 @@ using Microsoft.Extensions.Primitives;
 namespace HeaderPropagation
 {
     /// <summary>
-    /// Contains the headers values for the <see cref="HeaderPropagationMiddleware"/>.
+    /// Contains the outbound header values for the <see cref="HeaderPropagationMessageHandler"/>.
     /// </summary>
     public class HeaderPropagationValues
     {
-        private readonly static AsyncLocal<Dictionary<string, StringValues>> _headers = new AsyncLocal<Dictionary<string, StringValues>>();
+        private readonly static AsyncLocal<IDictionary<string, StringValues>> _headers = new AsyncLocal<IDictionary<string, StringValues>>();
 
         /// <summary>
-        /// Gets the headers values collected by the <see cref="HeaderPropagationMiddleware"/> from the current request that can be propagated.
+        /// Gets or sets the headers values collected by the <see cref="HeaderPropagationMiddleware"/> from the current request
+        /// that can be propagated.
         /// </summary>
+        /// <remarks>
+        /// The keys of <see cref="Headers"/> correspond to <see cref="HeaderPropagationEntry.OutboundHeaderName"/>.
+        /// </remarks>
         public IDictionary<string, StringValues> Headers
         {
             get
             {
-                return _headers.Value ?? (_headers.Value = new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase));
+                return _headers.Value;
+            }
+            set
+            {
+                _headers.Value = value;
             }
         }
     }
