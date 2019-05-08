@@ -3,10 +3,10 @@
 
 using System;
 using System.Net.Http;
-using HeaderPropagation;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace HeaderPropagation
 {
     public static class HeaderPropagationServiceCollectionExtensions
     {
