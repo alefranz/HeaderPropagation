@@ -24,10 +24,10 @@ namespace WebApplication
 
             services.AddHeaderPropagation(o =>
             {
-                // propagate the header
+                // propagate the header if present
                 o.Headers.Add("User-Agent");
 
-                // set it with a value factory if missing
+                // if still missing, set it with a value factory
                 o.Headers.Add("User-Agent", context => "Mozilla/5.0 (trust me, I'm really Mozilla!)");
             });
 

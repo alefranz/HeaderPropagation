@@ -22,10 +22,17 @@ app.UseHeaderPropagation();
 
 In `Startup.ConfigureServices` add the required services, eventually specifying a configuration action:
 ```csharp
-services.AddHeaderPropagation(o => o.Headers.Add("User-Agent", new HeaderPropagationEntry
+services.AddHeaderPropagation(o =>
 {
-    DefaultValue = "Mozilla/5.0 (trust me, I'm really Mozilla!)",
-}));
+    // propagate the header if present
+    o.Headers.Add("User-Agent");
+
+    // if still missing, set it with a value factory
+    o.Headers.Add("User-Agent", context => "Mozilla/5.0 (trust me, I'm really Mozilla!)");
+
+    // propagate the header if present, using a different name in the outbound request
+    o.Headers.Add("Accept-Language", "Lang");
+});
 ```
 If you are using the `HttpClientFactory`, add the `DelegatingHandler` to the client configuration using the `AddHeaderPropagation` extension method.
 
@@ -49,10 +56,7 @@ Each entry define the behaviour to propagate that header as follows:
 
 - When present, the `ValueFactory` is the only method used to set the value. The factory should return `StringValues.Empty` to not add the header.
 
-- When not present, the value will be taken from the header in the incoming request named as the key of this
-entry in `HeaderPropagationOptions.Headers` or, if missing or empty, it will be the values
-specified in `DefaultValue` or, if the `DefaultValue` is empty, the header will not
-be added to the outbound calls.
+- If multiple configurations for the same header are present, the first which returns a value wins.
 
 Please note the factory is called only once per incoming request and the same value will be used by all the
 outbound calls.
