@@ -10,7 +10,7 @@ namespace HeaderPropagation
     /// <summary>
     /// A context object for <see cref="HeaderPropagationEntry.ValueFilter"/> delegates.
     /// </summary>
-    public readonly struct HeaderPropagationContext
+    public struct HeaderPropagationContext
     {
         /// <summary>
         /// Initializes a new instance of <see cref="HeaderPropagationContext"/> with the provided

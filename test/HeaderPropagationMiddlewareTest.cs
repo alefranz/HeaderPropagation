@@ -111,7 +111,7 @@ namespace HeaderPropagation.Tests
         {
             // Arrange
             string receivedName = null;
-            StringValues receivedValue = default;
+            var receivedValue = StringValues.Empty;
             HttpContext receivedContext = null;
             Configuration.Headers.Add("in", context =>
             {
