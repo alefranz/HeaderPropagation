@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Xunit;
 
-namespace HeaderPropagation.Tests
+namespace Microsoft.AspNetCore.HeaderPropagation.Tests
 {
     public class HeaderPropagationMiddlewareTest
     {
@@ -111,7 +111,7 @@ namespace HeaderPropagation.Tests
         {
             // Arrange
             string receivedName = null;
-            var receivedValue = StringValues.Empty;
+            StringValues receivedValue = default;
             HttpContext receivedContext = null;
             Configuration.Headers.Add("in", context =>
             {

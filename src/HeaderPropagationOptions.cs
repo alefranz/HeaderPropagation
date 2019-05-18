@@ -1,7 +1,7 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-namespace HeaderPropagation
+namespace Microsoft.AspNetCore.HeaderPropagation
 {
     /// <summary>
     /// Provides configuration for the <see cref="HeaderPropagationMiddleware"/>.
@@ -13,9 +13,9 @@ namespace HeaderPropagation
         /// and to be propagated by the <see cref="HeaderPropagationMessageHandler"/>.
         /// </summary>
         /// <remarks>
-        /// Entries in <see cref="Headers"/> are processes in order while capturing headers inside
+        /// Entries in <see cref="Headers"/> are processed in order while capturing headers inside
         /// <see cref="HeaderPropagationMiddleware"/>. This can cause an earlier entry to take precedence
-        /// over a later entry if they have the same <see cref="HeaderPropagationEntry.OutboundHeaderName"/>.
+        /// over a later entry if they have the same <see cref="HeaderPropagationEntry.CapturedHeaderName"/>.
         /// </remarks>
         public HeaderPropagationEntryCollection Headers { get; set; } = new HeaderPropagationEntryCollection();
     }
