@@ -1,5 +1,4 @@
 using System;
-using HeaderPropagation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +37,17 @@ namespace WebApplication
             {
                 c.BaseAddress = new Uri("https://api.github.com/");
                 c.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
-            }).AddHeaderPropagation();
+            }).AddHeaderPropagation();  // propagate all the headers
+
+            services.AddHttpClient("example", c =>
+            {
+                c.BaseAddress = new Uri("https://api.github.com/");
+                c.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
+            }).AddHeaderPropagation(o =>
+            {
+                // or propagate only a specific header, also redefining the name to use
+                o.Headers.Add("User-Agent", "Source");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

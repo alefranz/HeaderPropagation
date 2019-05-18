@@ -5,18 +5,18 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 
-namespace HeaderPropagation
+namespace Microsoft.AspNetCore.HeaderPropagation
 {
     /// <summary>
     /// A context object for <see cref="HeaderPropagationEntry.ValueFilter"/> delegates.
     /// </summary>
-    public struct HeaderPropagationContext
+    public readonly struct HeaderPropagationContext
     {
         /// <summary>
         /// Initializes a new instance of <see cref="HeaderPropagationContext"/> with the provided
         /// <paramref name="httpContext"/>, <paramref name="headerName"/> and <paramref name="headerValue"/>.
         /// </summary>
-        /// <param name="httpContext">The <see cref="Microsoft.AspNetCore.Http.HttpContext"/> associated with the current request.</param>
+        /// <param name="httpContext">The <see cref="Http.HttpContext"/> associated with the current request.</param>
         /// <param name="headerName">The header name.</param>
         /// <param name="headerValue">The header value present in the current request.</param>
         public HeaderPropagationContext(HttpContext httpContext, string headerName, StringValues headerValue)
@@ -37,7 +37,7 @@ namespace HeaderPropagation
         }
 
         /// <summary>
-        /// Gets the <see cref="Microsoft.AspNetCore.Http.HttpContext"/> associated with the current request.
+        /// Gets the <see cref="Http.HttpContext"/> associated with the current request.
         /// </summary>
         public HttpContext HttpContext { get; }
 

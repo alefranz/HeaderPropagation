@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeaderPropagation.Tests", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{430B16DA-E8AA-4825-A08B-4B77F3982E24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "samples\WebApplication\WebApplication.csproj", "{5C28DE9F-84E6-4397-A652-CBA545C02C28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication", "samples\WebApplication\WebApplication.csproj", "{5C28DE9F-84E6-4397-A652-CBA545C02C28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

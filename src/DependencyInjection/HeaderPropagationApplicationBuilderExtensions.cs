@@ -3,10 +3,10 @@
 
 using System;
 using System.Net.Http;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HeaderPropagation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HeaderPropagation
+namespace Microsoft.AspNetCore.Builder
 {
     public static class HeaderPropagationApplicationBuilderExtensions
     {

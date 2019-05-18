@@ -5,10 +5,10 @@ using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Primitives;
 
-namespace HeaderPropagation
+namespace Microsoft.AspNetCore.HeaderPropagation
 {
     /// <summary>
     /// A message handler for propagating headers collected by the <see cref="HeaderPropagationMiddleware"/> to a outgoing request.
@@ -16,7 +16,7 @@ namespace HeaderPropagation
     public class HeaderPropagationMessageHandler : DelegatingHandler
     {
         private readonly HeaderPropagationValues _values;
-        private readonly HeaderPropagationOptions _options;
+        private readonly HeaderPropagationMessageHandlerOptions _options;
 
         /// <summary>
         /// Creates a new instance of the <see cref="HeaderPropagationMessageHandler"/>.
@@ -24,15 +24,9 @@ namespace HeaderPropagation
         /// <param name="options">The options that define which headers are propagated.</param>
         /// <param name="values">The values of the headers to be propagated populated by the
         /// <see cref="HeaderPropagationMiddleware"/>.</param>
-        public HeaderPropagationMessageHandler(IOptions<HeaderPropagationOptions> options, HeaderPropagationValues values)
+        public HeaderPropagationMessageHandler(HeaderPropagationMessageHandlerOptions options, HeaderPropagationValues values)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            _options = options.Value;
-
+            _options = options ?? throw new ArgumentNullException(nameof(options));
             _values = values ?? throw new ArgumentNullException(nameof(values));
         }
 
@@ -70,7 +64,7 @@ namespace HeaderPropagation
                 if (!request.Headers.TryGetValues(entry.OutboundHeaderName, out var _) &&
                     !(hasContent && request.Content.Headers.TryGetValues(entry.OutboundHeaderName, out var _)))
                 {
-                    if (captured.TryGetValue(entry.OutboundHeaderName, out var stringValues) &&
+                    if (captured.TryGetValue(entry.CapturedHeaderName, out var stringValues) &&
                         !StringValues.IsNullOrEmpty(stringValues))
                     {
                         if (stringValues.Count == 1)

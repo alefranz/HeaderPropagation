@@ -5,7 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using Microsoft.Extensions.Primitives;
 
-namespace HeaderPropagation
+namespace Microsoft.AspNetCore.HeaderPropagation
 {
     /// <summary>
     /// A collection of <see cref="HeaderPropagationEntry"/> items.
@@ -15,7 +15,7 @@ namespace HeaderPropagation
         /// <summary>
         /// Adds an <see cref="HeaderPropagationEntry"/> that will use <paramref name="headerName"/> as
         /// the value of <see cref="HeaderPropagationEntry.InboundHeaderName"/> and
-        /// <see cref="HeaderPropagationEntry.OutboundHeaderName"/>.
+        /// <see cref="HeaderPropagationEntry.CapturedHeaderName"/>.
         /// </summary>
         /// <param name="headerName">The header name to be propagated.</param>
         public void Add(string headerName)
@@ -31,7 +31,7 @@ namespace HeaderPropagation
         /// <summary>
         /// Adds an <see cref="HeaderPropagationEntry"/> that will use <paramref name="headerName"/> as
         /// the value of <see cref="HeaderPropagationEntry.InboundHeaderName"/> and
-        /// <see cref="HeaderPropagationEntry.OutboundHeaderName"/>.
+        /// <see cref="HeaderPropagationEntry.CapturedHeaderName"/>.
         /// </summary>
         /// <param name="headerName">The header name to be propagated.</param>
         /// <param name="valueFilter">
