@@ -3,6 +3,7 @@
 
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Xunit;
@@ -19,7 +20,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             State = new HeaderPropagationValues();
             Middleware = new HeaderPropagationMiddleware(Next,
                 new OptionsWrapper<HeaderPropagationOptions>(Configuration),
-                State);
+                State,
+                NullLogger<HeaderPropagationMiddleware>.Instance);
         }
 
         public DefaultHttpContext Context { get; set; }
