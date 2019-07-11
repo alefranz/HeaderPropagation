@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.HeaderPropagation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,7 +34,13 @@ namespace WebApplication
 
             using (var scope = _services.CreateScope())
             {
-                var client =scope.ServiceProvider.GetRequiredService<GitHubClient>();
+                // Initizalize the headers collections as workaround
+                var headerPropagationValues = scope.ServiceProvider.GetRequiredService<HeaderPropagationValues>();
+                headerPropagationValues.Headers = new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
+                //eventually set headers coming from other sources (e.g. consuming a queue)
+                headerPropagationValues.Headers.Add("User-Agent", "background-service");
+
+                var client = scope.ServiceProvider.GetRequiredService<GitHubClient>();
 
                 var result = await client.GetSomething();
 
