@@ -14,7 +14,7 @@ namespace WebApplication
 
         public async Task<string> GetSomething()
         {
-            var response = await _httpClient.GetAsync("/");
+            var response = await _httpClient.GetAsync("/users/alefranz");
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadAsStringAsync();

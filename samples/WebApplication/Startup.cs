@@ -48,6 +48,8 @@ namespace WebApplication
                 // or propagate only a specific header, also redefining the name to use
                 o.Headers.Add("User-Agent", "Source");
             });
+
+            services.AddHostedService<OneOffBackgroundService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
