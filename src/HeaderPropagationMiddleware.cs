@@ -36,7 +36,7 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         public Task Invoke(HttpContext context)
         {
             // We need to intialize the headers because the message handler will use this to detect misconfiguration.
-            var headers = _values.Headers ?? (_values.Headers = new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase));
+            var headers = _values.Headers ??= new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
 
             // Perf: avoid foreach since we don't define a struct enumerator.
             var entries = _options.Headers;

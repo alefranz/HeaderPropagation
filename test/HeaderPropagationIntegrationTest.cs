@@ -41,8 +41,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
                     {
                         try
                         {
-                            var c = context.RequestServices.GetRequiredService<IHttpClientFactory>().CreateClient("test");
-                            await c.GetAsync("http://localhost/"); // will throw
+                            var client = context.RequestServices.GetRequiredService<IHttpClientFactory>().CreateClient("test");
+                            await client.GetAsync("http://localhost/"); // will throw
                         }
                         catch (Exception ex)
                         {

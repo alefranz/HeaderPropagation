@@ -18,6 +18,7 @@ If you are using ASP.NET Core 3.0, please use the official package Microsoft.Asp
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
