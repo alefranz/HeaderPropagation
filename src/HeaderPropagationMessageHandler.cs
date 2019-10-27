@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HeaderPropagation
@@ -15,8 +16,9 @@ namespace Microsoft.AspNetCore.HeaderPropagation
     /// </summary>
     public class HeaderPropagationMessageHandler : DelegatingHandler
     {
-        private readonly HeaderPropagationValues _values;
         private readonly HeaderPropagationMessageHandlerOptions _options;
+        private readonly HeaderPropagationValues _values;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         /// <summary>
         /// Creates a new instance of the <see cref="HeaderPropagationMessageHandler"/>.
@@ -24,10 +26,11 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         /// <param name="options">The options that define which headers are propagated.</param>
         /// <param name="values">The values of the headers to be propagated populated by the
         /// <see cref="HeaderPropagationMiddleware"/>.</param>
-        public HeaderPropagationMessageHandler(HeaderPropagationMessageHandlerOptions options, HeaderPropagationValues values)
+        public HeaderPropagationMessageHandler(HeaderPropagationMessageHandlerOptions options, HeaderPropagationValues values, IHttpContextAccessor httpContextAccessor)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
             _values = values ?? throw new ArgumentNullException(nameof(values));
+            _httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -44,7 +47,7 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var captured = _values.Headers;
-            if (captured == null)
+            if (captured == null && _httpContextAccessor != null)
             {
                 var message =
                     $"The {nameof(HeaderPropagationValues)}.{nameof(HeaderPropagationValues.Headers)} property has not been " +

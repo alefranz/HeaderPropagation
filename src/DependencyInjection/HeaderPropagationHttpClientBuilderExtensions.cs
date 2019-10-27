@@ -3,6 +3,7 @@
 
 using System;
 using Microsoft.AspNetCore.HeaderPropagation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -35,7 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     var header = middlewareOptions.Value.Headers[i];
                     options.Headers.Add(header.CapturedHeaderName, header.CapturedHeaderName);
                 }
-                return new HeaderPropagationMessageHandler(options, services.GetRequiredService<HeaderPropagationValues>());
+                return new HeaderPropagationMessageHandler(options, services.GetRequiredService<HeaderPropagationValues>(), services.GetService<IHttpContextAccessor>());
             });
 
             return builder;
@@ -67,7 +68,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 var options = new HeaderPropagationMessageHandlerOptions();
                 configure(options);
-                return new HeaderPropagationMessageHandler(options, services.GetRequiredService<HeaderPropagationValues>());
+                return new HeaderPropagationMessageHandler(options, services.GetRequiredService<HeaderPropagationValues>(), services.GetService<IHttpContextAccessor>());
             });
 
             return builder;
